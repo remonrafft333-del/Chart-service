@@ -3,7 +3,22 @@ services:
     name: chart-service
     env: python
     plan: free
-    buildCommand: pip install -U pip setuptools wheel && pip install -r requirements.txt
+    autoDeploy: true
+    buildCommand: |
+      pip install --upgrade pip
+      # امنع البناء من السورس نهائيًا وثبّت Wheels فقط
+      pip install --only-binary=:all: --no-cache-dir -r requirements.txt
     startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
-    runtime:
-      pythonVersion: 3.11.9
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: MPLCONFIGDIR
+        value: "/tmp/matplotlib"
+      - key: APP_TZ
+        value: "Africa/Cairo"
+      - key: DEFAULT_SYMBOL
+        value: "XAU/USD"
+      - key: DEFAULT_INTERVAL
+        value: "1h"
+      # أضف TWELVE_KEY من لوحة Render كـ Secret
