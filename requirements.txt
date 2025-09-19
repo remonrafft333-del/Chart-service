@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+requests
+pandas
+mplfinance
+matplotlib
+Pillow
+python-dateutil
