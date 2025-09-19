@@ -135,8 +135,8 @@ def draw_signal_overlay(ax, entry: Optional[float], sl: Optional[float],
 
 def build_style(theme: str):
     """
-    ستايل الشارت. الإعداد الافتراضي داكن شبيه بـ TradingView/MT5
-    مع إلغاء الشبكة نهائيًا.
+    ستايل الشارت: داكن افتراضي شبيه بـ TradingView/MT5
+    والشبكة ملغية نهائيًا.
     """
     if theme.lower() == "light":
         return mpf.make_mpf_style(base_mpf_style="yahoo", gridstyle="")
@@ -185,7 +185,7 @@ def chart(
     tz: str = Query(DEFAULT_TZ, description="Timezone name - e.g. UTC, Africa/Cairo"),
 ):
     """
-    يولد صورة PNG لتشارت شموع مع أوڤرلاي صفقة (وشبكة ملغية).
+    يولد صورة PNG لتشارت شموع مع أوڤرلاي صفقة (شبكة ملغية + ثيم داكن).
     """
     try:
         df = fetch_twelvedata(symbol, interval, bars, tz)
@@ -227,7 +227,7 @@ def chart(
     fig, axes = mpf.plot(df, returnfig=True, **kwargs)
     ax_price = axes[0]
 
-    # إلغاء الشبكة من جميع المحاور (تأكيد)
+    # إلغاء الشبكة من جميع المحاور (تأكيد إضافي)
     for ax in fig.axes:
         try:
             ax.grid(False)
