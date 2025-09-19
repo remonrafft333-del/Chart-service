@@ -5,3 +5,5 @@ matplotlib==3.9.0
 mplfinance==0.12.10b0
 requests==2.32.2
 pillow==10.3.0
+setuptools>=65.5.1
+wheel
