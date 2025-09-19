@@ -86,11 +86,13 @@ def chart(
     style = mpf.make_mpf_style(
         base_mpf_style="nightclouds" if theme == "dark" else "yahoo",
         gridstyle="--"
-    )
-    fig, ax = mpf.plot(
-        df, type="candle", style=style, volume=False,
-        returnfig=True, figsize=(12, 7), tight_layout=True
-    )
+   fig, axes = mpf.plot(
+    df, type="candle", style=style, volume=False,
+    returnfig=True, figsize=(12, 7), tight_layout=True
+)
+
+ax = axes[0]   # المحور الرئيسي اللي هترسم عليه المستويات
+
 
     # 3) منطقة الصفقة + مستويات TP/SL
     zone_color = "#d62728" if direction == "SELL" else "#2ca02c"
